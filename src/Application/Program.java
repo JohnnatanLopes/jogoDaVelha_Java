@@ -1,6 +1,8 @@
 package Application;
 
-import java.util.IllegalFormatException;
+
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
 public class Program {
@@ -19,13 +21,11 @@ public class Program {
 
         // interface do game
         interfaceJogo();
-
         int cont = 0;
 
         try {
             for (int i = 0; i < mat.length; i++) {
                 for (int j = 0; j < mat.length; j++)
-
                     if (cont % 2 == 0) {
                         if (vencedor()) {
                             i = 3;
@@ -34,7 +34,14 @@ public class Program {
                         jogador = 'X';
                         System.out.println("Vez de X: ");
                         escolha = sc.next().charAt(0);
-                        escolhaNumero(jogador);
+                        try {
+                            escolhaNumero(jogador);
+                        }catch (IllegalArgumentException e) {
+                            interfaceJogo();
+                            System.out.println(e.getMessage());
+                            System.out.println("Tente novamente!");
+                            break;
+                        }
                         interfaceJogo();
                         cont++;
                     } else {
@@ -42,14 +49,24 @@ public class Program {
                             i = 3;
                             break;
                         }
+
                         jogador = 'O';
                         System.out.println("Vez de O: ");
                         escolha = sc.next().charAt(0);
-                        escolhaNumero(jogador);
+                        try {
+                            escolhaNumero(jogador);
+                        }catch (IllegalArgumentException e) {
+                            interfaceJogo();
+                            System.out.println(e.getMessage());
+                            System.out.println("Tente novamante!!");
+                            break;
+                        }
                         interfaceJogo();
                         cont++;
                     }
             }
+        }catch (Exception e) {
+            e.printStackTrace();
         }
 
         sc.close();
@@ -70,33 +87,59 @@ public class Program {
     public static void escolhaNumero(char jogador) {
 
         if (escolha == '1') {
+            if(mat[0][0] == 'X'  || mat[0][0] == 'O') {
+                throw new IllegalArgumentException("Ja foi jogado!");
+            }
             mat[0][0] = jogador;
         }
         if (escolha == '2') {
+            if(mat[0][1] == 'X'  || mat[0][1] == 'O') {
+                throw new IllegalArgumentException("Ja foi jogado!");
+            }
             mat[0][1] = jogador;
         }
         if (escolha == '3') {
+            if(mat[0][2] == 'X'  || mat[0][2] == 'O') {
+                throw new IllegalArgumentException("Ja foi jogado!");
+            }
             mat[0][2] = jogador;
         }
         if (escolha == '4') {
+            if(mat[1][0] == 'X'  || mat[1][0] == 'O') {
+                throw new IllegalArgumentException("Ja foi jogado!");
+            }
             mat[1][0] = jogador;
         }
         if (escolha == '5') {
+            if(mat[1][1] == 'X'  || mat[1][1] == 'O') {
+                throw new IllegalArgumentException("Ja foi jogado!");
+            }
             mat[1][1] = jogador;
         }
         if (escolha == '6') {
+            if(mat[1][2] == 'X'  || mat[1][2] == 'O') {
+                throw new IllegalArgumentException("Ja foi jogado!");
+            }
             mat[1][2] = jogador;
         }
         if (escolha == '7') {
+            if(mat[2][0] == 'X'  || mat[2][0] == 'O') {
+                throw new IllegalArgumentException("Ja foi jogado!");
+            }
             mat[2][0] = jogador;
         }
         if (escolha == '8') {
+            if(mat[2][1] == 'X'  || mat[2][1] == 'O') {
+                throw new IllegalArgumentException("Ja foi jogado!");
+            }
             mat[2][1] = jogador;
         }
         if (escolha == '9') {
+            if(mat[2][2] == 'X'  || mat[2][2] == 'O') {
+                throw new IllegalArgumentException("Ja foi jogado!");
+            }
             mat[2][2] = jogador;
         }
-
     }
 
     public static boolean vencedor() {
@@ -150,4 +193,4 @@ public class Program {
         return false;
     }
 
-    }
+}
